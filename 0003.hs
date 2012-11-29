@@ -4,6 +4,6 @@
 -- What is the largest prime factor of the number 600851475143 ?
 ------------------------------------------------------------------------------
 
-import Common.Primes (primeFactors)
+import Common.Prime (primeFactors)
 
 main = print $ maximum (primeFactors 600851475143)

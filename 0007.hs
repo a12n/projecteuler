@@ -5,7 +5,7 @@
 -- What is the 10 001st prime number?
 ------------------------------------------------------------------------------
 
-import Common.Primes (primeNums)
+import Common.Prime (primeNums)
 
 -- FIXME: Too slow.
 main = print $ primeNums !! (10001 - 1)
