@@ -2,7 +2,8 @@ module Common.Primes ( isDivis
                      , isPrime
                      , leastDivisor
                      , primeFactors
-                     , primeNums ) where
+                     , primeNums 
+                     , primeNumsTo ) where
 
 isDivis :: Integral a => a -> a -> Bool
 isDivis n m = mod n m == 0
@@ -25,3 +26,11 @@ primeFactors 1 = []
 primeFactors n = f : primeFactors (n `div` f)
   where
     f = leastDivisor n
+
+primeNumsTo :: Integral a => a -> [a]
+primeNumsTo n = sieve (2 : [3,5..n])
+  where
+    sieve [] = []
+    sieve ps@(p : ns)
+      | p^2 > n   = ps
+      | otherwise = p : sieve (filter (\x -> not (isDivis x p)) ns)
