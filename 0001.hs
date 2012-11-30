@@ -5,14 +5,14 @@
 -- Find the sum of all the multiples of 3 or 5 below 1000.
 ------------------------------------------------------------------------------
 
+import Common.TriangNum (triNum)
 import System.Environment (getArgs)
 
 -- Sum of multiplies of 'm' is '1 * m + 2 * m + ... + n * m'.
 -- This could be rewritten as 'm * (1 + 2 + ... + n)'.
 -- Also '1 + 2 + .. + n = (n * (n + 1)) `div` 2', thus
 -- 'm * (n * (n + 1) `div` 2)'.
-sumUpTo k m =
-  m * (n * (n + 1) `div` 2)
+sumUpTo k m = m * triNum n
   where
     n = (k - 1) `div` m
 
