@@ -12,7 +12,9 @@
 -- hundred natural numbers and the square of the sum.
 ------------------------------------------------------------------------------
 
-sqrOfSum n = (n^2 * (n^2 + 2 * n + 1)) `div` 4
+import Common.TriangNum (triNum)
+
+sqrOfSum n = (triNum n)^2
 
 sumOfSqr n = (n * (n + 1) * (2 * n + 1)) `div` 6
 
