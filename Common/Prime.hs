@@ -1,10 +1,10 @@
-module Common.Primes ( divides
-                     , divisors
-                     , isPrime
-                     , leastDivisor
-                     , primeFactors
-                     , primeNums
-                     , primeNumsTo ) where
+module Common.Prime ( divides
+                    , divisors
+                    , isPrime
+                    , leastDivisor
+                    , primeFactors
+                    , primeNums
+                    , primeNumsTo ) where
 
 divides :: Integral a => a -> a -> Bool
 divides m n = mod n m == 0
