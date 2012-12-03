@@ -16,8 +16,8 @@ import Data.List (delete)
 
 filterAmicable [] = []
 filterAmicable (x : xs) =
-  if x /= y && x == z then
-    (x : y : filterAmicable (if y > x then delete y xs else xs))
+  if x < y && x == z then
+    (x : y : filterAmicable (delete y xs))
   else
     filterAmicable xs
   where
