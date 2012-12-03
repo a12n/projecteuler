@@ -24,4 +24,4 @@ filterAmicable (x : xs) =
     y = sum (divisors x)
     z = sum (divisors y)
 
-main = print $ sum (filterAmicable [2..10000] :: [Int])
+main = print $ sum (filterAmicable [2..9999] :: [Int])
