@@ -24,7 +24,6 @@ import Common.NumTriangle (fromElements, maxTotal)
 import System.Environment (getArgs)
 
 main = do
-  [nStr] <- getArgs
+  n <- readLn
   numStr <- getContents
-  n <- readIO nStr
   print $ maxTotal (fromElements n (map read (words numStr))) n
