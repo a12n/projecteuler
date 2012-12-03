@@ -12,12 +12,11 @@
 ------------------------------------------------------------------------------
 
 import Common.Prime (divisors)
-import Data.List (delete)
 
 filterAmicable [] = []
 filterAmicable (x : xs) =
   if x < y && x == z then
-    (x : y : filterAmicable (delete y xs))
+    (x : y : filterAmicable xs)
   else
     filterAmicable xs
   where
