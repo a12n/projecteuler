@@ -1,12 +1,12 @@
-module Common.Primes ( isDivis
+module Common.Primes ( divides
                      , isPrime
                      , leastDivisor
                      , primeFactors
-                     , primeNums 
+                     , primeNums
                      , primeNumsTo ) where
 
-isDivis :: Integral a => a -> a -> Bool
-isDivis n m = mod n m == 0
+divides :: Integral a => a -> a -> Bool
+divides m n = mod n m == 0
 
 isPrime :: Integral a => a -> Bool
 isPrime n = leastDivisor n == n
@@ -17,7 +17,7 @@ primeNums = 2 : 3 : filter isPrime [4..]
 leastDivisor :: Integral a => a -> a
 leastDivisor n = findIn primeNums
   where
-    findIn (p : ps) | isDivis n p = p
+    findIn (p : ps) | divides p n = p
                     | p^2 > n     = n
                     | otherwise   = findIn ps
 
@@ -33,4 +33,4 @@ primeNumsTo n = sieve (2 : [3,5..n])
     sieve [] = []
     sieve ps@(p : ns)
       | p^2 > n   = ps
-      | otherwise = p : sieve (filter (\x -> not (isDivis x p)) ns)
+      | otherwise = p : sieve (filter (\x -> not (divides p x)) ns)
