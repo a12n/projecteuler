@@ -15,11 +15,16 @@ divisors 1 = []
 divisors 2 = [1]
 divisors n = 1 : aux 2
   where
-    aux k | divides k n = k : rest
-          | k * 2 > n   = []
-          | otherwise   = rest
-      where
-        rest = aux (k + 1)
+    aux k | k^2 > n   = []
+          | otherwise =
+      case divMod n k of
+        (m, 0) ->
+          if m /= k then
+            (k : m : aux (k + 1))
+          else
+            (k : aux (k + 1))
+        other ->
+          aux (k + 1)
 
 isPrime :: Integral a => a -> Bool
 isPrime n = leastDivisor n == n
