@@ -13,18 +13,19 @@ divides m n = mod n m == 0
 divisors :: Integral a => a -> [a]
 divisors 1 = []
 divisors 2 = [1]
-divisors n = 1 : aux 2
+divisors n | even n    = 1 : aux 2 1
+           | otherwise = 1 : aux 3 2
   where
-    aux k | k^2 > n   = []
-          | otherwise =
+    aux k s | k^2 > n   = []
+            | otherwise =
       case divMod n k of
         (m, 0) ->
           if m /= k then
-            (k : m : aux (k + 1))
+            (k : m : aux (k + s) s)
           else
-            (k : aux (k + 1))
+            (k : aux (k + s) s)
         other ->
-          aux (k + 1)
+          aux (k + s) s
 
 isPrime :: Integral a => a -> Bool
 isPrime n = leastDivisor n == n
