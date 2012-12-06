@@ -16,16 +16,23 @@
 -- century (1 Jan 1901 to 31 Dec 2000)?
 ------------------------------------------------------------------------------
 
-import Common.Prime (divides)
-import Data.List (intersect)
+data WeekDay = Sun | Mon | Tue | Wed | Thu | Fri | Sat deriving (Enum, Eq, Show)
 
-leap year = divides 400 year || (divides 4 year && not (divides 100 year))
+type Date = (Int, Int, Int)
 
-days year | leap year = [ 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
-          | otherwise = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
+type JDN = Int
 
-main = print $ length $ intersect fsts suns
+fromDate :: Date -> JDN
+fromDate (y, m, d) =
+  d + (153 * m' + 2) `div` 5 + 365 * y' + y' `div` 4 - g'
   where
-    years = [1901..2000]
-    fsts = init $ scanl (+) 1 (concat (map days years))
-    suns = takeWhile (<= (last fsts)) [6,(6 + 7)..]
+    a' = (14 - m) `div` 12
+    y' = y + 4800 - a'
+    m' = m + 12 * a' - 3
+    g' | (y, m, d) > (1582, 10, 15) = y' `div` 100 - y' `div` 400 + 32045
+       | otherwise                  = 32083
+
+fromJDN :: JDN -> WeekDay
+fromJDN jdn = toEnum $ mod (jdn + 1) 7
+
+main = print $ sum [1 | y <- [1901..2000], m <- [1..12], fromJDN (fromDate (y, m, 1)) == Sun]
